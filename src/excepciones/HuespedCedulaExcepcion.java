@@ -9,6 +9,8 @@ package excepciones;
  *
  * @author 415pc9
  */
-public class HuespedCedulaExcepcion {
-    
+public class HuespedCedulaExcepcion extends Exception{
+    public HuespedCedulaExcepcion(String cedula){
+        super("La cedula "+cedula+" ya se encuentra registrada");
+    }
 }

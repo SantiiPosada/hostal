@@ -5,10 +5,10 @@
  */
 package vistas;
 
+import controladores.ControladorHuesped;
 import excepciones.HabitacionEstadoExcepcion;
 import excepciones.HabitacionLlenaExcepcion;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import excepciones.HuespedCedulaExcepcion;
 import javax.swing.JOptionPane;
 import modelo.Huesped;
 
@@ -19,6 +19,7 @@ import modelo.Huesped;
 public class VentanaHuesped extends javax.swing.JFrame {
 
     private final VentanaHabitaciones ventana;
+    private ControladorHuesped controladorHuepsed;
     private final int fila;
     private final int columna;
 
@@ -28,6 +29,7 @@ public class VentanaHuesped extends javax.swing.JFrame {
         this.ventana = ventana;
         this.fila = fila;
         this.columna = columna;
+        this.controladorHuepsed = new ControladorHuesped(this.ventana.getControlador());
     }
 
     /**
@@ -212,26 +214,20 @@ public class VentanaHuesped extends javax.swing.JFrame {
             String edad = txtEdad.getText();
             String telefono = txtTelefono.getText();
             String genero = txtGenero.getText();
-             Huesped huesped = new Huesped(nombre, apellido, cedula, edad, telefono, genero);
-            /*
-            En el controlador del huesped podria agregar las validaciones del mismo, com cedula no existente etc y usar excepciones para mostrarlas en la vista.ejemplo
-            
-            *ventana, para acceder al controlador de habitacion y poder obtener todos los huespeds.
-             
-             
-            controladorHuesped.validarHuesped(huesped,ventana);
-            */
-            
-           
+            Huesped huesped = new Huesped(nombre, apellido, cedula, edad, telefono, genero);
+
+            controladorHuepsed.setHuesped(huesped);
+
+            controladorHuepsed.validarInformación();
 
             ventana.getControlador().agregarHuesped(huesped, fila, columna);
             JOptionPane.showMessageDialog(null, "Huesped agregado correctamente");
             ventana.validarPosiciones();
             ventana.setVisible(true);
             this.dispose();
-        } catch (HabitacionLlenaExcepcion | HabitacionEstadoExcepcion ex) {
+        } catch (HabitacionLlenaExcepcion | HabitacionEstadoExcepcion | HuespedCedulaExcepcion ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
-        } 
+        }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

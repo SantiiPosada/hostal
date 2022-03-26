@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controladores;
 
 import excepciones.HabitacionEstadoExcepcion;
@@ -20,11 +16,11 @@ import vistas.VentanaHabitaciones;
  *
  * @author 415pc9
  */
-public class Controlador {
+public class ControladorHabitacion {
 
     Habitacion[][] habitaciones;
 
-    public Controlador() {
+    public ControladorHabitacion() {
         habitaciones = new Habitacion[4][3];
         initHabitaciones();
     }
